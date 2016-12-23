@@ -1,6 +1,6 @@
 " javap.vim
 " Maintainer: Alexander Udalov
-" Version: 1.0
+" Version: 1.1
 
 if exists("javap_loaded")
     finish
@@ -21,9 +21,8 @@ function! JavapCurrentBuffer()
     let tmp = tempname() . ".class"
     execute "silent w " . tmp
     silent! 1,$delete
-    let result = system("javap -c -v -p -s " . shellescape(tmp))
-    silent! put! =result
-    normal! gg
+    execute "silent read !javap -c -v -p -s " . shellescape(tmp)
+    normal! ggdd
     set filetype=java " TODO: doesn't work for zipfile:*/*.class
     setlocal nobin
 endfunction
