@@ -1,10 +1,15 @@
 " javap.vim
 " Maintainer: Alexander Udalov
-" Version: 1.1
+" Version: 1.2
 
 if exists("javap_loaded")
     finish
 endif
+
+if !exists("g:javap_prg")
+    let g:javap_prg = "javap -c -v -p -s"
+endif
+
 let g:javap_loaded = 1
 
 augroup javap
@@ -21,7 +26,7 @@ function! JavapCurrentBuffer()
     let tmp = tempname() . ".class"
     execute "silent w " . tmp
     silent! 1,$delete
-    execute "silent read !javap -c -v -p -s " . shellescape(tmp)
+    execute "silent read !" . g:javap_prg . " " . shellescape(tmp)
     normal! ggdd
     set filetype=java " TODO: doesn't work for zipfile:*/*.class
     setlocal nobin
