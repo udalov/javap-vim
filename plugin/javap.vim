@@ -1,6 +1,6 @@
 " javap.vim
 " Maintainer: Alexander Udalov
-" Version: 1.2
+" Version: 1.3
 
 if exists("javap_loaded")
     finish
@@ -30,4 +30,5 @@ function! JavapCurrentBuffer()
     normal! ggdd
     set filetype=java " TODO: doesn't work for zipfile:*/*.class
     setlocal nobin
+    setlocal nomod ro
 endfunction
