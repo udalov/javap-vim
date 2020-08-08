@@ -1,6 +1,6 @@
 " javap.vim
 " Maintainer: Alexander Udalov
-" Version: 1.3
+" Version: 1.4
 
 if exists("javap_loaded")
     finish
@@ -23,6 +23,9 @@ augroup javap
 augroup END
 
 function! JavapCurrentBuffer()
+    if &l:bin == 0
+        return
+    endif
     let tmp = tempname() . ".class"
     execute "silent w " . tmp
     silent! 1,$delete
